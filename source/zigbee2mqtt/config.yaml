@@ -1,0 +1,27 @@
+permit_join: true
+homeassistant:
+  enabled: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://localhost
+serial:
+  port: /dev/ttyUSB0
+frontend:
+  enabled: true
+  port: 8080
+advanced:
+  log_level: warning
+version: 5
+# devices:
+#   '0xc09b9efffef63cb2':
+#     friendly_name: living room
+#     description: living room
+#   '0xc09b9efffef5fbc1':
+#     friendly_name: office
+#     description: office
+#   '0xc09b9efffef63c6b':
+#     friendly_name: our bedroom
+#     description: our bedroom
+#   '0xc09b9efffef65dce':
+#     friendly_name: Owen bedroom
+#     description: Owen bedroom

@@ -1,0 +1,12 @@
+[Unit]
+Description=Zigbee2MQTT
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/node /opt/zigbee2mqtt/index.js
+WorkingDirectory=/opt/zigbee2mqtt
+Restart=always
+User=renaud
+
+[Install]
+WantedBy=multi-user.target

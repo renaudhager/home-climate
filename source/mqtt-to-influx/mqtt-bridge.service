@@ -1,0 +1,11 @@
+[Unit]
+Description=MQTT to InfluxDB bridge
+After=mosquitto.service influxdb.service zigbee2mqtt.service
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/mqtt-to-influx/bridge.py
+Restart=always
+User=renaud
+
+[Install]
+WantedBy=multi-user.target
