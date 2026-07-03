@@ -16,25 +16,25 @@ A full-stack home climate monitoring system built on a Raspberry Pi, using Zigbe
 
 ## Architecture
 
-​```mermaid
+```mermaid
 flowchart LR
-    subgraph sensors["Zigbee sensors (SNZB-02P)"]
+    subgraph sensors[Zigbee sensors]
         S1[Living room]
         S2[Office]
         S3[Our bedroom]
         S4[Bob bedroom]
     end
 
-    subgraph pi["Raspberry Pi"]
-        DON[Sonoff dongle\nZigbee coordinator]
-        Z2M[Zigbee2MQTT · :8080]
-        MOS[Mosquitto · :1883]
-        PY[Python bridge\nmqtt-to-influx]
-        IDB[(InfluxDB · :8086)]
-        GRA[Grafana · :3000]
+    subgraph pi[Raspberry Pi]
+        DON[Sonoff dongle]
+        Z2M[Zigbee2MQTT :8080]
+        MOS[Mosquitto :1883]
+        PY[Python bridge]
+        IDB[(InfluxDB :8086)]
+        GRA[Grafana :3000]
     end
 
-    BRW[Browser\nany LAN device]
+    BRW[Browser / LAN device]
 
     S1 & S2 & S3 & S4 -->|Zigbee radio| DON
     DON -->|USB serial| Z2M
@@ -43,7 +43,7 @@ flowchart LR
     PY -->|write| IDB
     IDB -->|Flux query| GRA
     GRA -->|HTTP :3000| BRW
-​```
+```
 
 ## Hardware
 
