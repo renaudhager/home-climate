@@ -8,7 +8,14 @@ INFLUX_TOKEN  = "<REDACTED>"
 INFLUX_ORG    = "renorainz"
 INFLUX_BUCKET = "temperature"
 
-ROOMS = ["living room", "office", "our bedroom", "Owen bedroom"]
+ROOMS = {
+    "living room":  "indoor",
+    "office":       "indoor",
+    "our bedroom":  "indoor",
+    "owen bedroom": "indoor",
+    "riverside balcony": "outdoor",
+    "courtyard balcony": "outdoor",
+}
 
 write_client = InfluxDBClient(
     url=INFLUX_URL, token=INFLUX_TOKEN, org=INFLUX_ORG
@@ -29,7 +36,13 @@ def on_message(client, userdata, msg):
     except json.JSONDecodeError:
         return
 
-    point = Point("sensor_reading").tag("room", room)
+    location = ROOMS[room]  # "indoor" or "outdoor"
+
+    point = (
+        Point("sensor_reading")
+        .tag("room", room)
+        .tag("location", location)  # new tag
+    )
 
     if "temperature" in payload:
         point = point.field("temperature", float(payload["temperature"]))
@@ -39,7 +52,7 @@ def on_message(client, userdata, msg):
         point = point.field("battery", float(payload["battery"]))
 
     write_client.write(bucket=INFLUX_BUCKET, record=point)
-    print(f"{room}: {payload.get('temperature')}°C  {payload.get('humidity')}%  battery={payload.get('battery')}%")
+    print(f"[{location}] {room}: {payload.get('temperature')}°C  {payload.get('humidity')}%")
 
 client = mqtt.Client()
 client.on_connect = on_connect
