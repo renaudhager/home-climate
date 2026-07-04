@@ -12,7 +12,7 @@ ROOMS = {
     "living room":  "indoor",
     "office":       "indoor",
     "our bedroom":  "indoor",
-    "owen bedroom": "indoor",
+    "Owen bedroom": "indoor",
     "riverside balcony": "outdoor",
     "courtyard balcony": "outdoor",
 }
@@ -59,3 +59,4 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.connect("localhost", 1883)
 client.loop_forever()
+

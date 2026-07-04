@@ -271,6 +271,30 @@
                 }
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Owen bedroom"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
           }
         ]
       },
@@ -520,6 +544,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "#ad46ff",
             "mode": "thresholds"
           },
           "decimals": 1,
@@ -548,7 +573,7 @@
       "id": 6,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -1035,6 +1060,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "#ad46ff",
             "mode": "thresholds"
           },
           "decimals": 1,
@@ -1059,7 +1085,7 @@
       "id": 17,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -1081,7 +1107,7 @@
             "type": "influxdb",
             "uid": "afqxucc14gjr4f"
           },
-          "query": "from(bucket: \"temperature\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"sensor_reading\" and r._field == \"temperature\")\n  |> filter(fn: (r) => r.room == \"Owen bedroom\")\n  |> min()",
+          "query": "from(bucket: \"temperature\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"sensor_reading\" and r._field == \"temperature\")\n  |> filter(fn: (r) => r.room == \"Owen bedroom\")\n  |> min()\n  |> drop(columns: [\"location\"])",
           "refId": "A"
         }
       ],
@@ -1529,6 +1555,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "#ad46ff",
             "mode": "thresholds"
           },
           "decimals": 1,
@@ -1553,7 +1580,7 @@
       "id": 18,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -1575,7 +1602,7 @@
             "type": "influxdb",
             "uid": "afqxucc14gjr4f"
           },
-          "query": "from(bucket: \"temperature\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"sensor_reading\" and r._field == \"temperature\")\n  |> filter(fn: (r) => r.room == \"Owen bedroom\")\n  |> max()",
+          "query": "from(bucket: \"temperature\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"sensor_reading\" and r._field == \"temperature\")\n  |> filter(fn: (r) => r.room == \"Owen bedroom\")\n  |> max()\n  |> drop(columns: [\"location\"])",
           "refId": "A"
         }
       ],
@@ -2884,5 +2911,5 @@
   "timezone": "browser",
   "title": "Home climate",
   "uid": "ad8bgmh",
-  "version": 149
+  "version": 152
 }
